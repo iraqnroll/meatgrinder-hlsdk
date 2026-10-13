@@ -206,6 +206,10 @@ if(HAVE_TGMATH_H)
 	endif()
 endif()
 
+# Meatgrinder: if set, cl_dll and dlls copy their library into <dir>/<GAMEDIR>/... after
+# every build, so F5 in Visual Studio always runs the latest code.
+set(MEATGRINDER_DEPLOY_DIR "" CACHE PATH "Engine folder to copy built libraries into after each build (empty = off)")
+
 add_subdirectory(game_shared)
 
 if(BUILD_CLIENT)

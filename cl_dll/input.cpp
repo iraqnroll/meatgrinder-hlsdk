@@ -29,6 +29,7 @@ extern "C"
 #include <ctype.h>
 
 #include "vgui_TeamFortressViewport.h"
+#include "mg_client.h"
 
 extern "C" 
 {
@@ -1154,4 +1155,5 @@ void ShutdownInput( void )
 void DLLEXPORT HUD_Shutdown( void )
 {
 	ShutdownInput();
+	MG_ClientShutdown();
 }

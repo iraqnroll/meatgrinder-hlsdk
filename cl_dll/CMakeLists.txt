@@ -81,6 +81,7 @@ set (CLDLL_SOURCES
 	ammohistory.cpp
 	battery.cpp
 	cdll_int.cpp
+	mg_client.cpp
 	com_weapons.cpp
 	death.cpp
 	demo.cpp
@@ -144,6 +145,8 @@ list(APPEND CLDLL_SOURCES
 	../game_shared/vgui_scrollbar2.cpp
 	../game_shared/vgui_slider2.cpp
 	../game_shared/voice_banmgr.cpp
+	../game_shared/mg_data.cpp
+	../external/cjson/cJSON.c
 )
 
 if (HAVE_STRLCPY)

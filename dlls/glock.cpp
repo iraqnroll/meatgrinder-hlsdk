@@ -20,6 +20,7 @@
 #include "weapons.h"
 #include "nodes.h"
 #include "player.h"
+#include "mg_data.h"
 
 enum glock_e
 {
@@ -106,12 +107,14 @@ BOOL CGlock::Deploy()
 
 void CGlock::SecondaryAttack( void )
 {
-	GlockFire( 0.1f, 0.2f, FALSE );
+	GlockFire( MG_WeaponFloat( "glock", "secondary_spread", 0.1f ),
+		MG_WeaponFloat( "glock", "secondary_cycle", 0.2f ), FALSE );
 }
 
 void CGlock::PrimaryAttack( void )
 {
-	GlockFire( 0.01f, 0.3f, TRUE );
+	GlockFire( MG_WeaponFloat( "glock", "primary_spread", 0.01f ),
+		MG_WeaponFloat( "glock", "primary_cycle", 0.3f ), TRUE );
 }
 
 void CGlock::GlockFire( float flSpread, float flCycleTime, BOOL fUseAutoAim )

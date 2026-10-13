@@ -146,6 +146,8 @@ set (SVDLL_SOURCES
 	xen.cpp
 	zombie.cpp
 	../game_shared/voice_gamemgr.cpp
+	../game_shared/mg_data.cpp
+	../external/cjson/cJSON.c
 	../pm_shared/pm_debug.c
 	../pm_shared/pm_math.c
 	../pm_shared/pm_shared.c

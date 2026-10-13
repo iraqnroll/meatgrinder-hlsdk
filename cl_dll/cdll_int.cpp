@@ -33,6 +33,7 @@ extern "C"
 
 #include <string.h>
 #include "vcs_info.h"
+#include "mg_client.h"
 
 cl_enginefunc_t gEngfuncs;
 CHud gHUD;
@@ -222,6 +223,8 @@ the hud variables.
 
 void DLLEXPORT HUD_Init( void )
 {
+	MG_ClientInit();
+
 	InitInput();
 	gHUD.Init();
 	Scheme_Init();

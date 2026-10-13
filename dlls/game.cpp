@@ -17,6 +17,10 @@
 #include "util.h"
 #include "game.h"
 #include "vcs_info.h"
+#include "mg_data.h"
+
+#include <stdarg.h>
+#include <stdio.h>
 
 static cvar_t build_commit = { "sv_game_build_commit", g_VCSInfo_Commit };
 static cvar_t build_branch = { "sv_game_build_branch", g_VCSInfo_Branch };
@@ -465,8 +469,40 @@ cvar_t sv_busters = { "sv_busters", "0" };
 
 // Register your console variables here
 // This gets called one time when the game is initialied
+static unsigned char *MG_ServerLoadFile( const char *path, int *length )
+{
+	return LOAD_FILE_FOR_ME( path, length );
+}
+
+static void MG_ServerFreeFile( void *buffer )
+{
+	FREE_FILE( buffer );
+}
+
+static void MG_ServerLog( const char *fmt, ... )
+{
+	char text[1024];
+	va_list args;
+
+	va_start( args, fmt );
+	vsnprintf( text, sizeof( text ), fmt, args );
+	va_end( args );
+
+	ALERT( at_console, "%s", text );
+}
+
+// Server side of "reload_data"; the client's command runs this too on a listen server.
+static void MG_ServerReloadData( void )
+{
+	MG_DataReload();
+}
+
 void GameDLLInit( void )
 {
+	MG_DataInit( MG_ServerLoadFile, MG_ServerFreeFile, MG_ServerLog );
+	MG_DataReload();
+	g_engfuncs.pfnAddServerCommand( "sv_reload_data", MG_ServerReloadData );
+
 	g_psv_gravity = CVAR_GET_POINTER( "sv_gravity" );
 	g_psv_aim = CVAR_GET_POINTER( "sv_aim" );
 	g_psv_allow_autoaim = CVAR_GET_POINTER( "sv_allow_autoaim" );

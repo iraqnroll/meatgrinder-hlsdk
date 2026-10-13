@@ -22,6 +22,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "mg_data.h"
 
 #if !CLIENT_DLL
 #define BOLT_AIR_VELOCITY	2000
@@ -349,7 +350,7 @@ void CCrossbow::PrimaryAttack( void )
 // this function only gets called in multiplayer
 void CCrossbow::FireSniperBolt()
 {
-	m_flNextPrimaryAttack = GetNextAttackDelay( 0.75f );
+	m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "crossbow", "primary_cycle", 0.75f ));
 
 	if( m_iClip == 0 )
 	{
@@ -448,9 +449,9 @@ void CCrossbow::FireBolt()
 		// HEV suit - indicate out of ammo condition
 		m_pPlayer->SetSuitUpdate( "!HEV_AMO0", FALSE, 0 );
 
-	m_flNextPrimaryAttack = GetNextAttackDelay( 0.75f );
+	m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "crossbow", "primary_cycle", 0.75f ));
 
-	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 0.75f;
+	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "crossbow", "primary_cycle", 0.75f );
 
 	if( m_iClip != 0 )
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 5.0f;
@@ -485,7 +486,7 @@ void CCrossbow::Reload( void )
 		SecondaryAttack();
 	}
 
-	if( DefaultReload( CROSSBOW_MAX_CLIP, CROSSBOW_RELOAD, 4.5f ) )
+	if( DefaultReload( CROSSBOW_MAX_CLIP, CROSSBOW_RELOAD, MG_WeaponFloat( "crossbow", "reload_time", 4.5f )) )
 	{
 		EMIT_SOUND_DYN( ENT( m_pPlayer->pev ), CHAN_ITEM, "weapons/xbow_reload1.wav", RANDOM_FLOAT( 0.95f, 1.0f ), ATTN_NORM, 0, 93 + RANDOM_LONG( 0, 0xF ) );
 	}

@@ -21,6 +21,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "mg_data.h"
 
 // special deathmatch shotgun spreads
 #define VECTOR_CONE_DM_SHOTGUN	Vector( 0.08716, 0.04362, 0.00 )// 10 degrees by 5 degrees
@@ -175,8 +176,8 @@ void CShotgun::PrimaryAttack()
 	//if( m_iClip != 0 )
 		m_flPumpTime = gpGlobals->time + 0.5f;
 
-	m_flNextPrimaryAttack = GetNextAttackDelay( 0.75f );
-	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 0.75f;
+	m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "shotgun", "primary_cycle", 0.75f ));
+	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "shotgun", "primary_cycle", 0.75f );
 	if( m_iClip != 0 )
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 5.0f;
 	else
@@ -246,8 +247,8 @@ void CShotgun::SecondaryAttack( void )
 	//if( m_iClip != 0 )
 		m_flPumpTime = gpGlobals->time + 0.95f;
 
-	m_flNextPrimaryAttack = GetNextAttackDelay( 1.5f );
-	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 1.5f;
+	m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "shotgun", "secondary_cycle", 1.5f ));
+	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "shotgun", "secondary_cycle", 1.5f );
 	if( m_iClip != 0 )
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 6.0f;
 	else

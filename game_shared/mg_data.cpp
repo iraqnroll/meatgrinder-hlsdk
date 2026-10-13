@@ -3,6 +3,7 @@ mg_data.cpp - Meatgrinder data files (JSON under <gamedir>/data/)
 */
 
 #include <stddef.h>
+#include <math.h>
 #include "mg_data.h"
 #include "../external/cjson/cJSON.h"
 
@@ -88,4 +89,12 @@ float MG_WeaponFloat( const char *weapon, const char *key, float fallback )
 	const cJSON *value = cJSON_GetObjectItemCaseSensitive( entry, key );
 
 	return cJSON_IsNumber( value ) ? (float)value->valuedouble : fallback;
+}
+
+float MG_WeaponSpread( const char *weapon, const char *key, float fallbackDegrees )
+{
+	float degrees = MG_WeaponFloat( weapon, key, fallbackDegrees );
+
+	// VECTOR_CONE_<N>DEGREES = sin( N / 2 )
+	return sinf( degrees * 0.5f * ( 3.14159265f / 180.0f ));
 }

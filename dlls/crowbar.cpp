@@ -21,6 +21,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "mg_data.h"
 
 #define	CROWBAR_BODYHIT_VOLUME 128
 #define	CROWBAR_WALLHIT_VOLUME 512
@@ -213,7 +214,7 @@ int CCrowbar::Swing( int fFirst )
 		if( fFirst )
 		{
 			// miss
-			m_flNextPrimaryAttack = GetNextAttackDelay( 0.5 );
+			m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "crowbar", "miss_cycle", 0.5f ));
 #if CROWBAR_IDLE_ANIM
 			m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + UTIL_SharedRandomFloat( m_pPlayer->random_seed, 10, 15 );
 #endif
@@ -291,7 +292,7 @@ int CCrowbar::Swing( int fFirst )
 				if( !pEntity->IsAlive() )
 				{
 #if CROWBAR_FIX_RAPID_CROWBAR
-					m_flNextPrimaryAttack = GetNextAttackDelay(0.25);
+					m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "crowbar", "hit_cycle", 0.25f ));
 #endif
 					return TRUE;
 				}
@@ -338,9 +339,9 @@ int CCrowbar::Swing( int fFirst )
 		pev->nextthink = gpGlobals->time + 0.2f;
 #endif
 #if CROWBAR_DELAY_FIX
-		m_flNextPrimaryAttack = UTIL_WeaponTimeBase() + 0.25f;
+		m_flNextPrimaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "crowbar", "hit_cycle", 0.25f );
 #else
-		m_flNextPrimaryAttack = GetNextAttackDelay( 0.25f );
+		m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "crowbar", "hit_cycle", 0.25f ));
 #endif
 	}
 #if CROWBAR_IDLE_ANIM

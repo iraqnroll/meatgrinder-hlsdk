@@ -23,6 +23,7 @@
 #include "player.h"
 #include "hornet.h"
 #include "gamerules.h"
+#include "mg_data.h"
 
 enum hgun_e
 {
@@ -160,11 +161,11 @@ void CHgun::PrimaryAttack()
 	// player "shoot" animation
 	m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
-	m_flNextPrimaryAttack = m_flNextPrimaryAttack + 0.25f;
+	m_flNextPrimaryAttack = m_flNextPrimaryAttack + MG_WeaponFloat( "hornetgun", "primary_cycle", 0.25f );
 
 	if( m_flNextPrimaryAttack < UTIL_WeaponTimeBase() )
 	{
-		m_flNextPrimaryAttack = UTIL_WeaponTimeBase() + 0.25f;
+		m_flNextPrimaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "hornetgun", "primary_cycle", 0.25f );
 	}
 
 	m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + UTIL_SharedRandomFloat( m_pPlayer->random_seed, 10, 15 );
@@ -251,7 +252,7 @@ void CHgun::SecondaryAttack( void )
 	// player "shoot" animation
 	m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
 
-	m_flNextPrimaryAttack = m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 0.1f;
+	m_flNextPrimaryAttack = m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + MG_WeaponFloat( "hornetgun", "secondary_cycle", 0.1f );
 	m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + UTIL_SharedRandomFloat( m_pPlayer->random_seed, 10.0f, 15.0f );
 }
 

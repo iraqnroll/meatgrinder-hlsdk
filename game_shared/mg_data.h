@@ -25,4 +25,8 @@ bool MG_DataReload( void );
 // data/weapons.json: { "glock": { "primary_cycle": 0.3, ... }, ... }
 float MG_WeaponFloat( const char *weapon, const char *key, float fallback );
 
+// Bullet spread: the JSON value is the full cone angle in degrees (like
+// VECTOR_CONE_6DEGREES); returns the per-axis value FireBulletsPlayer expects.
+float MG_WeaponSpread( const char *weapon, const char *key, float fallbackDegrees );
+
 #endif // MG_DATA_H

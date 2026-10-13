@@ -18,6 +18,8 @@
 #include "game.h"
 #include "vcs_info.h"
 #include "mg_data.h"
+#include "cbase.h"
+#include "gamerules.h"
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -495,6 +497,10 @@ static void MG_ServerLog( const char *fmt, ... )
 static void MG_ServerReloadData( void )
 {
 	MG_DataReload();
+
+	// Weapon damage lives in gSkillData; rebuild it so new damage values apply now.
+	if( g_pGameRules )
+		g_pGameRules->RefreshSkillData();
 }
 
 void GameDLLInit( void )

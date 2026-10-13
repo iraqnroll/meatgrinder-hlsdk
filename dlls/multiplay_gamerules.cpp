@@ -27,6 +27,7 @@
 #include	"game.h"
 #include	"items.h"
 #include	"voice_gamemgr.h"
+#include	"mg_data.h"
 #include	"hltv.h"
 #include	"trains.h"
 
@@ -174,6 +175,24 @@ void CHalfLifeMultiplay::RefreshSkillData( void )
 
 	// hornet
 	gSkillData.plrDmgHornet = 10;
+
+	// Meatgrinder: data/weapons.json overrides the values above
+	gSkillData.plrDmgCrowbar = MG_WeaponFloat( "crowbar", "damage", gSkillData.plrDmgCrowbar );
+	gSkillData.plrDmg9MM = MG_WeaponFloat( "glock", "damage", gSkillData.plrDmg9MM );
+	gSkillData.plrDmg357 = MG_WeaponFloat( "python", "damage", gSkillData.plrDmg357 );
+	gSkillData.plrDmgMP5 = MG_WeaponFloat( "mp5", "damage", gSkillData.plrDmgMP5 );
+	gSkillData.plrDmgM203Grenade = MG_WeaponFloat( "mp5", "grenade_damage", gSkillData.plrDmgM203Grenade );
+	gSkillData.plrDmgBuckshot = MG_WeaponFloat( "shotgun", "damage", gSkillData.plrDmgBuckshot );
+	gSkillData.plrDmgCrossbowClient = MG_WeaponFloat( "crossbow", "damage_players", gSkillData.plrDmgCrossbowClient );
+	gSkillData.plrDmgCrossbowMonster = MG_WeaponFloat( "crossbow", "damage_monsters", gSkillData.plrDmgCrossbowMonster );
+	gSkillData.plrDmgRPG = MG_WeaponFloat( "rpg", "damage", gSkillData.plrDmgRPG );
+	gSkillData.plrDmgGauss = MG_WeaponFloat( "gauss", "damage", gSkillData.plrDmgGauss );
+	gSkillData.plrDmgEgonNarrow = MG_WeaponFloat( "egon", "damage_narrow", gSkillData.plrDmgEgonNarrow );
+	gSkillData.plrDmgEgonWide = MG_WeaponFloat( "egon", "damage_wide", gSkillData.plrDmgEgonWide );
+	gSkillData.plrDmgHandGrenade = MG_WeaponFloat( "handgrenade", "damage", gSkillData.plrDmgHandGrenade );
+	gSkillData.plrDmgSatchel = MG_WeaponFloat( "satchel", "damage", gSkillData.plrDmgSatchel );
+	gSkillData.plrDmgTripmine = MG_WeaponFloat( "tripmine", "damage", gSkillData.plrDmgTripmine );
+	gSkillData.plrDmgHornet = MG_WeaponFloat( "hornetgun", "damage", gSkillData.plrDmgHornet );
 }
 
 // longest the intermission can last, in seconds

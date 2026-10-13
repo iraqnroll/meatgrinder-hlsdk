@@ -22,6 +22,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "mg_data.h"
 
 enum rpg_e
 {
@@ -341,7 +342,7 @@ void CRpg::Reload( void )
 #endif
 
 	if( m_iClip == 0 )
-		iResult = DefaultReload( RPG_MAX_CLIP, RPG_RELOAD, 2 );
+		iResult = DefaultReload( RPG_MAX_CLIP, RPG_RELOAD, MG_WeaponFloat( "rpg", "reload_time", 2.0f ));
 
 	if( iResult )
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + UTIL_SharedRandomFloat( m_pPlayer->random_seed, 10, 15 );
@@ -489,7 +490,7 @@ void CRpg::PrimaryAttack()
 
 		m_iClip--; 
 
-		m_flNextPrimaryAttack = GetNextAttackDelay( 1.5f );
+		m_flNextPrimaryAttack = GetNextAttackDelay( MG_WeaponFloat( "rpg", "primary_cycle", 1.5f ));
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 1.5f;
 
 		ResetEmptySound();

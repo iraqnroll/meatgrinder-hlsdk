@@ -107,13 +107,13 @@ BOOL CGlock::Deploy()
 
 void CGlock::SecondaryAttack( void )
 {
-	GlockFire( MG_WeaponFloat( "glock", "secondary_spread", 0.1f ),
+	GlockFire( MG_WeaponSpread( "glock", "secondary_spread", 11.478f ),
 		MG_WeaponFloat( "glock", "secondary_cycle", 0.2f ), FALSE );
 }
 
 void CGlock::PrimaryAttack( void )
 {
-	GlockFire( MG_WeaponFloat( "glock", "primary_spread", 0.01f ),
+	GlockFire( MG_WeaponSpread( "glock", "primary_spread", 1.146f ),
 		MG_WeaponFloat( "glock", "primary_cycle", 0.3f ), TRUE );
 }
 
@@ -190,9 +190,9 @@ void CGlock::Reload( void )
 	int iResult;
 
 	if( m_iClip == 0 )
-		iResult = DefaultReload( GLOCK_MAX_CLIP, GLOCK_RELOAD, 1.5f );
+		iResult = DefaultReload( GLOCK_MAX_CLIP, GLOCK_RELOAD, MG_WeaponFloat( "glock", "reload_time", 1.5f ));
 	else
-		iResult = DefaultReload( GLOCK_MAX_CLIP, GLOCK_RELOAD_NOT_EMPTY, 1.5f );
+		iResult = DefaultReload( GLOCK_MAX_CLIP, GLOCK_RELOAD_NOT_EMPTY, MG_WeaponFloat( "glock", "reload_time", 1.5f ));
 
 	if( iResult )
 	{
